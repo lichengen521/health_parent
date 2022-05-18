@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--配置dao层的映射文件-->
+<mapper namespace="com.health.dao.RoleDao">
+    <!--  根据userId查询拥有的角色  -->
+    <select id="findByUserId" parameterType="int" resultType="com.health.pojo.Role">
+        select *
+        from t_role t1,
+             t_user_role t2
+        where t1.id = t2.role_id
+          and t2.user_id = #{user_id}
+    </select>
+    <!--    根据userId查询拥有的菜单-->
+    <select id="findMenuByRoleId" parameterType="int" resultType="com.health.pojo.Menu">
+        select *
+        from t_menu t1,
+             t_role_menu t2
+        where t1.id = t2.role_id
+          and t2.role_id = #{role_id}
+    </select>
+
+</mapper>
